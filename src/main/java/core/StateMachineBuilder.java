@@ -17,6 +17,16 @@ public class StateMachineBuilder {
         return this;
     }
 
+    public StateMachineBuilder addPostActionEvent(Event e) {
+        stateMachine.addPostActionEvent(e);
+        return this;
+    }
+
+    public StateMachineBuilder addPreActionEvent(Event e) {
+        stateMachine.addPreActionEvent(e);
+        return this;
+    }
+
     public StateMachine build() {
         return stateMachine;
     }

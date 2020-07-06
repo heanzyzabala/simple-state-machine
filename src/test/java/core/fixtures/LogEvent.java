@@ -1,4 +1,6 @@
-package core;
+package core.fixtures;
+
+import core.Event;
 
 public class LogEvent implements Event {
 

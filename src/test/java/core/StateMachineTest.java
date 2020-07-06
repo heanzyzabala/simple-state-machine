@@ -1,5 +1,6 @@
 package core;
 
+import core.fixtures.LogEvent;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,6 +79,47 @@ public class StateMachineTest {
         State actual = stateMachine.next(a1);
         assertEquals(new State("NEXT"), actual);
         stateMachine.next(invalid);
+    }
+
+    @Test
+    public void shouldExecutePreActionEvent() {
+        State opened = new State("OPENED");
+        State closed = new State("CLOSED");
+
+        Action close = new ActionBuilder()
+                .name("close")
+                .event(() -> System.out.println("close"))
+                .build();
+
+        Action open = new ActionBuilder()
+                .name("open")
+                .event(() -> System.out.println("open"))
+                .build();
+
+        Transition openedToClosed = new TransitionBuilder()
+                .name("openedToClosed")
+                .from(opened)
+                .action(close)
+                .to(closed)
+                .build();
+
+        Transition closedToOpen = new TransitionBuilder()
+                .name("closedToOpen")
+                .from(closed)
+                .action(open)
+                .to(opened)
+                .build();
+
+        StateMachine stateMachine = new StateMachineBuilder()
+                .initialState(opened)
+                .addPreActionEvent(() -> System.out.println("pre action"))
+                .addTransition(openedToClosed)
+                .addTransition(closedToOpen)
+                .addPostActionEvent(() -> System.out.println("post action"))
+                .build();
+
+        stateMachine.next(close);
+        stateMachine.next(open);
     }
 
     @Test(expected = StateMachine.TransitionAlreadyExists.class)
