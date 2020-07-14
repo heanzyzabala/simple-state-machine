@@ -1,6 +1,5 @@
 package core;
 
-import core.fixtures.LogEvent;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,8 +35,9 @@ public class StateMachineTest {
 
         a1 = new ActionBuilder()
                 .name("action1")
-                .event(new LogEvent())
+                .event(() -> System.out.println("action"))
                 .build();
+
         a2 = new ActionBuilder()
                 .name("action1")
                 .build();
