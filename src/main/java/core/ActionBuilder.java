@@ -1,7 +1,7 @@
 package core;
 
 public class ActionBuilder {
-    private Action action;
+    private final Action action;
 
     public ActionBuilder() {
         action = new Action();
@@ -9,11 +9,6 @@ public class ActionBuilder {
 
     public ActionBuilder name(String name) {
         action.setName(name);
-        return this;
-    }
-
-    public ActionBuilder event(Event event) {
-        action.setEvent(event);
         return this;
     }
 

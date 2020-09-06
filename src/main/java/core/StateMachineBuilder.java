@@ -1,7 +1,7 @@
 package core;
 
 public class StateMachineBuilder {
-    private StateMachine stateMachine;
+    private final StateMachine stateMachine;
 
     public StateMachineBuilder() {
         stateMachine = new StateMachine();
@@ -14,16 +14,6 @@ public class StateMachineBuilder {
 
     public StateMachineBuilder addTransition(Transition transition) {
         stateMachine.addTransition(transition);
-        return this;
-    }
-
-    public StateMachineBuilder addPostActionEvent(Event e) {
-        stateMachine.addPostActionEvent(e);
-        return this;
-    }
-
-    public StateMachineBuilder addPreActionEvent(Event e) {
-        stateMachine.addPreActionEvent(e);
         return this;
     }
 

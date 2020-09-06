@@ -1,7 +1,7 @@
 package core;
 
 public class State {
-    private String name;
+    private final String name;
 
     public State(String name) {
         this.name = name;
@@ -16,6 +16,6 @@ public class State {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         State state = (State) o;
-        return name.equals(state.name);
+        return name.equals(state.getName());
     }
 }

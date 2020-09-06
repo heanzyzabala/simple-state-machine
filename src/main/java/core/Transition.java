@@ -10,7 +10,9 @@ public class Transition {
         this.name = name;
     }
 
-    public void setFromState(State fromState) { this.fromState = fromState; }
+    public void setFromState(State fromState) {
+        this.fromState = fromState;
+    }
 
     public void setAction(Action action) {
         this.action = action;

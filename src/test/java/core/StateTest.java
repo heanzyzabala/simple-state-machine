@@ -7,8 +7,10 @@ import static org.junit.Assert.assertEquals;
 public class StateTest {
 
     @Test
-    public void shouldPass() {
-        State state = new State("INITIAL");
-        assertEquals("INITIAL", state.getName());
+    public void shouldBeEquals() {
+        State s = new State("STATE");
+        State s1 = new State(s.getName());
+
+        assertEquals(s, s1);
     }
 }

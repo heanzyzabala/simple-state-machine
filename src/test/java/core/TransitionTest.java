@@ -7,20 +7,28 @@ import static org.junit.Assert.assertEquals;
 public class TransitionTest {
 
     @Test
-    public void shouldPass() {
-        State from = new State("FROM");
-        State to = new State("TO");
-        Action action = new Action();
-        action.setName("action");
-        Transition transition = new Transition();
-        transition.setName("t1");
-        transition.setFromState(from);
-        transition.setAction(action);
-        transition.setToState(to);
+    public void shouldBeEquals() {
+        State s1 = new State("STATE_1");
+        State s2 = new State("STATE_2");
 
-        assertEquals("t1", transition.getName());
-        assertEquals(from, transition.getFromState());
-        assertEquals(action, transition.getAction());
-        assertEquals(to, transition.getToState());
+        Action a = new ActionBuilder()
+                .name("ACTION")
+                .build();
+
+        Transition t = new TransitionBuilder()
+                .name("TRANSITION")
+                .action(a)
+                .from(s1)
+                .to(s2)
+                .build();
+
+        Transition t1 = new TransitionBuilder()
+                .name(t.getName())
+                .action(a)
+                .from(s1)
+                .to(s2)
+                .build();
+
+        assertEquals(t, t1);
     }
 }

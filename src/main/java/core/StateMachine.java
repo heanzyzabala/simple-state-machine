@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StateMachine {
-    private State currentState;
-    private List<Transition> transitions;
-    private List<Event> postActionEvents;
-    private List<Event> preActionEvents;
+    private State currentState = null;
+    private final List<Transition> transitions;
 
     public StateMachine() {
         transitions = new ArrayList<>();
-        postActionEvents = new ArrayList<>();
-        preActionEvents = new ArrayList<>();
     }
 
     public void setInitialState(State initialState) {
@@ -25,28 +21,13 @@ public class StateMachine {
         transitions.add(transition);
     }
 
-    public void addPreActionEvent(Event e) {
-        this.preActionEvents.add(e);
-    }
-
-    public void addPostActionEvent(Event e) {
-        this.postActionEvents.add(e);
-    }
-
     private boolean transitionExists(Transition transition) {
         return transitions.contains(transition);
     }
 
-    public State next(Action action) {
-        for(Transition t : transitions) {
-            if(isValidTransition(action, t)) {
-                for(Event e : preActionEvents) {
-                    e.execute();
-                }
-                action.execute();
-                for(Event e : postActionEvents) {
-                    e.execute();
-                }
+    public State execute(Action action) {
+        for (Transition t : transitions) {
+            if (isValidTransition(action, t)) {
                 currentState = t.getToState();
                 return currentState;
             }
@@ -54,8 +35,8 @@ public class StateMachine {
         throw new TransitionNotFound();
     }
 
-    private boolean isValidTransition(Action action, Transition t) {
-        return t.getAction().equals(action) && t.getFromState().equals(currentState);
+    private boolean isValidTransition(Action a, Transition t) {
+        return t.getAction().equals(a) && t.getFromState().equals(currentState);
     }
 
     static class TransitionNotFound extends RuntimeException {

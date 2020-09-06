@@ -1,7 +1,7 @@
 package core;
 
 public class TransitionBuilder {
-    private Transition transition;
+    private final Transition transition;
 
     public TransitionBuilder() {
         transition = new Transition();
